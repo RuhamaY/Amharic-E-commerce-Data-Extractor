@@ -27,7 +27,7 @@ This project scrapes e-commerce messages from Ethiopian Telegram channels, prepr
 
 ### 1. Clone the repository and install requirements
 ```bash
-git clone https://github.com/RuhamaY/amharic-ner-telegram.git
+git clone https://github.com/RuhamaY/Amharic-E-commerce-Data-Extractor.git
 cd amharic-ner-telegram
 pip install -r requirements.txt
 ````
