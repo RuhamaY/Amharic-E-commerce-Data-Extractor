@@ -1,5 +1,3 @@
----
-
 # EthioMart Lite: Amharic NER for Telegram E-Commerce
 
 📌 **Project Overview**
