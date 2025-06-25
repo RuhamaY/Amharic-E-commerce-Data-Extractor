@@ -1,67 +1,138 @@
-# Amharic E-commerce Data Extractor
+---
 
-This project scrapes e-commerce messages from Ethiopian Telegram channels, preprocesses the Amharic text, and prepares data for Named Entity Recognition (NER) fine-tuning.
+# EthioMart Lite: Amharic NER for Telegram E-Commerce
 
-## 📦 Project Structure
+📌 **Project Overview**
 
-- `scrape_telegram.py` - Scrapes messages from selected Telegram channels.
-- `preprocess_data.py` - Cleans and tokenizes raw messages.
-- `label_data_to_conll.py` - Interactive CLI tool for labeling tokens in CoNLL format.
-- `raw_telegram_data.json` - Raw scraped data.
-- `preprocessed_data.csv` - Cleaned and tokenized data.
-- `labeled_data.conll` - Manually labeled dataset for NER.
+**EthioMart Lite** is a lightweight pipeline that transforms Telegram e-commerce messages in Amharic into structured data for Named Entity Recognition (NER). The solution includes:
 
-## 🧪 Task Objectives
+* 🧲 Telegram message scraping
+* 🧹 Amharic-English text preprocessing
+* 🏷️ Manual token-level labeling in CoNLL format
+* ⚙️ NER model training and interpretability
+* 📈 Vendor analytics for business intelligence
 
-### ✅ Task 1: Data Ingestion & Preprocessing
-- Collect messages from 20+ Ethiopian Telegram channels.
-- Preprocess text by normalizing, tokenizing, and cleaning.
-- Save structured message data with metadata.
+---
 
-### ✅ Task 2: Label Data in CoNLL Format
-- Load preprocessed messages.
-- Manually annotate 30–50 messages with `B-Product`, `B-PRICE`, `B-LOC`, etc.
-- Save in standard CoNLL format for model fine-tuning.
+## 🏆 Key Achievements
 
-### ✅ Task 3: Exploratory Data Analysis (EDA)
-Identified high-frequency terms and patterns in e-commerce messages.
+### ✅ Data Pipeline
 
-Noted consistent formats for prices (e.g., 1000 ብር), products, and locations.
+* Scraped **1,000+ messages** from 5 Amharic Telegram vendors:
 
-Insights used to guide labeling logic and entity class definitions.
+  * `ZemenExpress`, `nevacomputer`, `helloomarketethiopia`, `Fashiontera`, `kuruwear`
+* Saved in `raw_telegram_data.json`
 
-### ✅ Task 4: Manual Annotation
-Interactive labeling interface using Python CLI.
+### ✅ Data Processing
 
-30 messages labeled using BIO tagging scheme.
+* Text cleaned, tokenized, and exported to `preprocessed_data.csv`
+* Nulls, emojis, and links removed
+* Script: `preprocess_data.ipynb`
 
-Supported entities: B-Product, I-Product, B-PRICE, I-PRICE, B-LOC, I-LOC, and O.
+### ✅ Manual NER Labeling
 
-### ✅ Task 5: CoNLL Format Output
-Each token is aligned with its label.
+* 30 messages (\~400+ tokens) labeled using BIO format
+* Output in `labeled_data.conll`
+* Script: `label_data_to_conll.ipynb`
 
-Sentences are separated by a blank line.
+### ✅ NER Modeling
 
-Format is compatible with common NLP training pipelines.
+* Transformer models fine-tuned for NER
+* Performance benchmarked in `model_comparision.ipynb`
+* Interpretability analysis in `model_interpretability.ipynb`
 
-### ✅ Task 6: Preparation for Training
-Project organized to support:
+### ✅ Vendor Analytics
 
-Data loading for transformers and CRF models
+* Created vendor scoring logic based on:
 
-Further annotation
+  * Views per post
+  * Posting frequency
+  * Price profile
+* Script: `vendor_scorecard.ipynb`
 
-Integration with spaCy NER training pipelines
+---
 
-Label consistency ensured for reproducible training
+## 📂 Repository Structure
 
-## 📋 How to Run
+```plaintext
+Amharic-E-commerce-Data-Extractor/
+├── .github/workflows/                # GitHub Actions
+├── notebooks/
+│   ├── scrape_telegram.ipynb         # Task 1 - Scraping
+│   ├── preprocess_data.ipynb         # Task 2 - Preprocessing
+│   ├── label_data_to_conll.ipynb     # Task 3 - Manual labeling
+│   ├── model_training.ipynb          # Task 4 - Fine-tuning models
+│   ├── model_comparision.ipynb       # Task 5 - Benchmarking
+│   ├── model_interpretability.ipynb  # Task 6 - SHAP/LIME insights
+│   └── vendor_scorecard.ipynb        # Task 6 - Vendor profiling
+│
+├── requirements.txt                  # Python dependencies
+├── README.md                         
+└── .gitignore
+```
 
-### 1. Clone the repository and install requirements
+---
+
+## 🛠️ Installation Guide
+
+### Prerequisites
+
+* Python 3.8+
+* Telegram API credentials from [my.telegram.org](https://my.telegram.org)
+
+### Setup
+
 ```bash
-git clone https://github.com/Samrwitt/Amharic-E-commerce-Data-Extractor.git
-cd amharic-ner-telegram
+# Clone the repository
+git clone https://github.com/RuhamaY/Amharic-E-commerce-Data-Extractor.git
+cd Amharic-E-commerce-Data-Extractor
+
+# Install requirements
 pip install -r requirements.txt
-````
+```
+
+---
+
+## 🚀 Usage
+
+### 1. Scrape Messages
+
+```bash
+# Inside a Jupyter cell or CLI
+!python notebooks/scrape_telegram.ipynb
+```
+
+### 2. Preprocess Text
+
+```bash
+!python notebooks/preprocess_data.ipynb
+```
+
+### 3. Label Tokens for NER
+
+```bash
+!python notebooks/label_data_to_conll.ipynb
+```
+
+### 4. Train & Evaluate Models
+
+Open:
+
+* `model_training.ipynb`
+* `model_comparision.ipynb`
+
+### 5. Analyze Results
+
+* Run `model_interpretability.ipynb` for SHAP
+* Run `vendor_scorecard.ipynb` for scoring vendors
+
+---
+
+## 🔍 NER Entity Tags
+
+* `B-Product`, `I-Product`
+* `B-PRICE`, `I-PRICE`
+* `B-LOC`, `I-LOC`
+* `O` – Outside any entity
 
 ---
